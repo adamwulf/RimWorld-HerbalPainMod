@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Pain Drugs</name>
+  <author>tommiethegun</author>
+  <targetVersion>0.17.1557</targetVersion>
+  <url>https://ludeon.com/forums/index.php?topic=35255</url>
+	<description>Adds the ability to craft Herbal Pain Medicine, which reduces the user's pain by 50%.</description>
+</ModMetaData>

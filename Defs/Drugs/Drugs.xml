@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugPillBase">
+    <defName>HerbalPainMedicine</defName>
+    <label>herbalpain</label>
+    <description>Refined herbal medicine, useful as a pain medication.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/HerbalPain</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <socialPropernessMatters>false</socialPropernessMatters>
+    <rotatable>false</rotatable>
+    <statBases>
+      <WorkToMake>750</WorkToMake>
+      <MarketValue>48</MarketValue>
+      <Mass>0.005</Mass>
+    </statBases>
+    <techLevel>Industrial</techLevel>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>HerbalPainHigh</hediffDef>
+          <severity>1.0</severity>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <recipeMaker>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+    </recipeMaker>
+    <costList>
+      <HerbalMedicine>3</HerbalMedicine>
+    </costList>
+    <comps>
+        <li Class="CompProperties_Drug">
+            <listOrder>1001</listOrder>
+            <overdoseSeverityOffset>
+                <min>0.08</min>
+                <max>0.14</max>
+            </overdoseSeverityOffset>
+        </li>
+    </comps>
+  </ThingDef>
+  
+  <HediffDef>
+    <defName>HerbalPainHigh</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>herbalpain</label>
+    <defaultLabelColor>(0.32,1,0.59)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.18</severityPerDay>
+      </li>
+    </comps>
+      <stages>
+        <li>
+            <painFactor>0.5</painFactor>
+        </li>
+      </stages>
+  </HediffDef>
+  
+</Defs>
