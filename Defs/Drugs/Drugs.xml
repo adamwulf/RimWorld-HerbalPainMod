@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+
   <ThingDef ParentName="MakeableDrugPillBase">
     <defName>HerbalPainMedicine</defName>
-    <label>herbalpain</label>
-    <description>Refined herbal medicine, useful as a pain medication.</description>
+    <label>herbal broth</label>
+    <description>Broth made from herbal medicine, useful as a simple pain medication.</description>
     <graphicData>
       <texPath>Things/Item/Drug/HerbalPain</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -16,19 +17,21 @@
       <MarketValue>48</MarketValue>
       <Mass>0.005</Mass>
     </statBases>
-    <techLevel>Industrial</techLevel>
+    <techLevel>Neolithic</techLevel>
     <ingestible>
       <drugCategory>Medical</drugCategory>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
-          <hediffDef>HerbalPainHigh</hediffDef>
-          <severity>1.0</severity>
+          <hediffDef>PainMedHigh</hediffDef>
+          <severity>.07</severity>
         </li>
       </outcomeDoers>
     </ingestible>
     <recipeMaker>
       <recipeUsers>
-        <li>DrugLab</li>
+        <li>FueledStove</li>
+        <li>ElectricStove</li>
+        <li>Campfire</li>
       </recipeUsers>
     </recipeMaker>
     <costList>
@@ -45,23 +48,145 @@
     </comps>
   </ThingDef>
   
+  <ThingDef ParentName="MakeableDrugPillBase">
+      <defName>PainMedicine</defName>
+      <label>pain medicine</label>
+      <description>Refined medicine, useful as a pain medication.</description>
+      <graphicData>
+          <texPath>Things/Item/Drug/PainMedicine</texPath>
+          <graphicClass>Graphic_StackCount</graphicClass>
+      </graphicData>
+      <socialPropernessMatters>false</socialPropernessMatters>
+      <rotatable>false</rotatable>
+      <statBases>
+          <WorkToMake>750</WorkToMake>
+          <MarketValue>48</MarketValue>
+          <Mass>0.005</Mass>
+      </statBases>
+      <techLevel>Industrial</techLevel>
+      <ingestible>
+          <drugCategory>Medical</drugCategory>
+          <outcomeDoers>
+              <li Class="IngestionOutcomeDoer_GiveHediff">
+                  <hediffDef>PainMedHigh</hediffDef>
+                  <severity>.39</severity>
+              </li>
+          </outcomeDoers>
+      </ingestible>
+      <recipeMaker>
+          <recipeUsers>
+              <li>DrugLab</li>
+          </recipeUsers>
+      </recipeMaker>
+      <costList>
+          <Neutroamine>1</Neutroamine>
+          <Medicine>3</Medicine>
+      </costList>
+      <comps>
+          <li Class="CompProperties_Drug">
+              <listOrder>1001</listOrder>
+              <overdoseSeverityOffset>
+                  <min>0.08</min>
+                  <max>0.14</max>
+              </overdoseSeverityOffset>
+          </li>
+      </comps>
+  </ThingDef>
+
   <HediffDef>
-    <defName>HerbalPainHigh</defName>
+    <defName>PainMedHigh</defName>
     <hediffClass>HediffWithComps</hediffClass>
-    <label>herbalpain</label>
+    <label>pain meds</label>
     <defaultLabelColor>(0.32,1,0.59)</defaultLabelColor>
     <scenarioCanAdd>true</scenarioCanAdd>
     <maxSeverity>1.0</maxSeverity>
     <comps>
       <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>-0.18</severityPerDay>
+        <severityPerDay>-0.52</severityPerDay>
       </li>
     </comps>
       <stages>
-        <li>
-            <painFactor>0.5</painFactor>
-        </li>
+          <li>
+              <label>buzzed-hidden</label>
+              <everVisible>false</everVisible>
+          </li>
+          <li>
+              <minSeverity>0.1</minSeverity>
+              <painFactor>0.73</painFactor>
+          </li>
+          <li>
+              <label>Numb</label>
+              <minSeverity>0.4</minSeverity>
+              <painFactor>0.52</painFactor>
+              <capMods>
+                  <li>
+                      <capacity>Consciousness</capacity>
+                      <offset>-0.05</offset>
+                  </li>
+                  <li>
+                      <capacity>Manipulation</capacity>
+                      <offset>-0.05</offset>
+                  </li>
+              </capMods>
+          </li>
+          <li>
+              <label>Cloudy</label>
+              <minSeverity>0.62</minSeverity>
+              <painFactor>0.21</painFactor>
+              <capMods>
+                  <li>
+                      <capacity>Consciousness</capacity>
+                      <offset>-0.15</offset>
+                  </li>
+                  <li>
+                      <capacity>Manipulation</capacity>
+                      <offset>-0.15</offset>
+                  </li>
+                  <li>
+                      <capacity>Moving</capacity>
+                      <offset>-0.1</offset>
+                  </li>
+              </capMods>
+          </li>
+          <li>
+              <label>Weak</label>
+              <minSeverity>0.62</minSeverity>
+              <painFactor>0.21</painFactor>
+              <capMods>
+                  <li>
+                      <capacity>Consciousness</capacity>
+                      <offset>-0.4</offset>
+                  </li>
+                  <li>
+                      <capacity>Manipulation</capacity>
+                      <offset>-0.4</offset>
+                  </li>
+                  <li>
+                      <capacity>Moving</capacity>
+                      <offset>-0.4</offset>
+                  </li>
+              </capMods>
+          </li>
+          <li>
+              <label>High</label>
+              <minSeverity>1</minSeverity>
+              <painFactor>0</painFactor>
+              <capMods>
+                  <li>
+                      <capacity>Consciousness</capacity>
+                      <offset>-0.75</offset>
+                  </li>
+                  <li>
+                      <capacity>Manipulation</capacity>
+                      <offset>-0.75</offset>
+                  </li>
+                  <li>
+                      <capacity>Moving</capacity>
+                      <offset>-0.75</offset>
+                  </li>
+              </capMods>
+          </li>
       </stages>
   </HediffDef>
-  
+
 </Defs>
